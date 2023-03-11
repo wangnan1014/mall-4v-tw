@@ -79,11 +79,12 @@
                 }
             },
             "splashscreen" : {
-                "androidStyle" : "common",
+                "androidStyle" : "default",
                 "iosStyle" : "common",
                 "useOriginalMsgbox" : true,
                 "android" : {
-                    "hdpi" : ""
+                    "hdpi" : "C:/Users/admin/Downloads/团队-11.png",
+                    "xhdpi" : "C:/Users/admin/Pictures/Camera Roll/微信图片_20190601104137.png"
                 }
             }
         }

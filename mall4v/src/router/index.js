@@ -48,10 +48,10 @@ const mainRoutes = {
 }
 
 const router = new Router({
-  mode: 'history',
-  base: '/console',
-  // mode: 'hash',
-  // base: '',
+  // mode: 'history',
+  // base: '/console',
+  mode: 'hash',
+  base: '',
   scrollBehavior: () => ({ y: 0 }),
   isAddDynamicMenuRoutes: false, // 是否已经添加动态(菜单)路由
   routes: globalRoutes.concat(mainRoutes)

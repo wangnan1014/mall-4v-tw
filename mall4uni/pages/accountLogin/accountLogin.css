@@ -5,14 +5,14 @@ page{
 .con{
   margin-top: 60px;
 }
-image {
+/* image {
   display: block;
   width: 250rpx;
   height: 240rpx;
   margin: auto;
   border-radius: 30%;
   margin-bottom: 8%;
-}
+} */
 
 .login-form{
   width: 90%;
@@ -29,7 +29,7 @@ image {
   border-radius: 6rpx;
   font-size: 26rpx;
   padding: 8rpx;
-  margin-top: 80rpx;
+  margin-top: 50rpx;
 }
 .to-idx-btn{
 	width: 90%;

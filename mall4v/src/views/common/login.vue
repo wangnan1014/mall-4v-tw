@@ -2,14 +2,11 @@
   <div class="login">
     <div class="login-box">
       <div class="top">
-       
-        <div class="logo">
-          <img style="margin-bottom: 20px;" src="~@/assets/img/logo_r.png">
 
-          <img  src="~@/assets/img/login-logo.png" alt="">
-
+        <!-- <div class="logo">
+          <img  src="~@/assets/img/login-logo.png" >
        </div>
-              
+               -->
        
       </div>
       <div class="mid">
@@ -60,6 +57,10 @@
       :img-size="{width:'400px',height:'200px'}"
       @success="login"
     />
+    <div class ="buttomimg">
+      <img style="position:fixed;  top: 850px; right: 10px;" src="~@/assets/img/logo_r.png">
+    </div>
+
   </div>
 </template>
 
@@ -168,6 +169,10 @@ export default {
 </script>
 
 <style lang="scss">
+.buttomimg{
+  position: relative;
+  
+}
 .login {
   width: 100%;
   height: 100%;
@@ -177,10 +182,11 @@ export default {
 }
 .login .login-box {
   position: absolute;
-  left: 50%;
+  left: 35%;
   transform: translateX(-50%);
   height: 100%;
-  padding-top: 10%;
+  padding-top: 15%;
+  width: 300px;
 }
 .login .login-box .top {
   margin-bottom: 30px;
@@ -211,7 +217,7 @@ export default {
   border-radius: 3px;
 }
 .info {
-  width: 410px;
+  // width: 510px;
 }
 .login-captcha {
   height: 40px;

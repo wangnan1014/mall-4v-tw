@@ -5,7 +5,7 @@ export const tableOption = {
     indexLabel: '序号',
     stripe: true,
     menuAlign: 'center',
-    menuWidth: 200,
+    menuWidth: 100,
     align: 'center',
     refreshBtn: false,
     columnBtn:false,
@@ -21,9 +21,9 @@ export const tableOption = {
     },
     column: [
     {
-        label: '日期',
+        label: '預定日期',
         prop: 'orderUseDate',
-        type:'datetime',
+        type:'date',
         format: 'yyyy-MM-dd',                  // 这是组件展示的日期格式
         valueFormat: 'yyyy-MM-dd HH:mm:ss',        // 这是组件value值的格式
         // searchValue: [this.dateRange[0], this.dateRange[1]],      // 这是我获取的默认的显示日期，我这里是['2020-08-04', '2020-09-22']
@@ -50,7 +50,7 @@ export const tableOption = {
       label: '部門',
       prop: 'deptName',
       width:250,
-      type: 'select',
+      // type: 'select',
       search: true,
     },{
       label: '員工',
@@ -120,7 +120,7 @@ export const tableOption = {
         search: true
     },
     {
-        label: '預定時間',
+        label: '訂餐時間',
         prop: 'createTime',
         type:'datetime',
     },

@@ -21,23 +21,28 @@ export const tableOption = {
     label: '產品名字',
     prop: 'prodName',
     search: true
-  }, {
-    label: '商品原價',
-    prop: 'oriPrice'
-  }, {
+  }, 
+  // {
+  //   label: '商品原價',
+  //   prop: 'oriPrice'
+  // }, 
+  {
     label: '商品現價',
     prop: 'price'
-  }, {
+  }, 
+  {
     label: '商品庫存',
     prop: 'totalStocks'
-  }, {
-    label: '產品图片',
-    prop: 'pic',
-    type: 'upload',
-    width: 150,
-    listType: 'picture-img'
+  },
+  //  {
+  //   label: '產品图片',
+  //   prop: 'pic',
+  //   type: 'upload',
+  //   width: 150,
+  //   listType: 'picture-img'
 
-  }, {
+  // },
+   {
     width: 150,
     label: '狀態',
     prop: 'status',

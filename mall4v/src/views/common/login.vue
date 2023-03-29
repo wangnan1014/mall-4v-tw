@@ -182,7 +182,7 @@ export default {
 }
 .login .login-box {
   position: absolute;
-  left: 35%;
+  left: 50%;
   transform: translateX(-50%);
   height: 100%;
   padding-top: 15%;

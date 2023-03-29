@@ -1,7 +1,6 @@
 <template>
 	<view style=" position: relative;    height: 100%;    z-index: 2;">
-		<!-- <image class="bg top" src="../../static/login_top.jpg" style ='z-index: 2'></image> -->
-		<image class="bg top" src="../../static/login_top1.png" style ='z-index: -1'></image>
+		<image class="bg top" src="../../static/logon_pc.png" style ='z-index: -1'></image>
 		<!-- 登录 -->
 		<view class="login-form wrapper center" >
 			<view class ="box">
@@ -314,7 +313,9 @@
         /* background-color: red; */
 }
 .wrapper {
-      padding-top: 380rpx;
+      /* padding-top: 480rpx; */
+	  padding-top: 11%;
+	  padding-left:28%;
       width: 90%;
     }
 .box{

@@ -397,7 +397,14 @@
 					url: "../accountLogin/accountLogin"
 				})
 			},
-
+/**
+			 * 去PC登陆
+			 */
+			toPcLogin: function() {
+				uni.navigateTo({
+					url: "../accountLogin/pcLogin"
+				})
+			},
 			/**
 			 * 退出登录
 			 */
@@ -428,7 +435,18 @@
 						// 	})
 						// }, 1000)
 						setTimeout(() => {
-							ths.toLogin()
+							// #ifdef H5
+							if (navigator.userAgent.indexOf('Windows') > -1) {  
+							  ths.toPcLogin()
+							}else{
+							  ths.toLogin()
+							}
+							// #endif
+							// #ifdef APP-PLUS
+							 ths.toLogin()
+							// #endif
+							
+							
 						}, 1000)
 					}
 				})
@@ -467,6 +485,7 @@
 				}
 				uni.setStorageSync("indexLoad",true);
 				uni.setStorageSync("categoryLoad",true);
+				uni.setStorageSync("countLoad",true);
 				
 			},
 			getInputVal: function(e) {

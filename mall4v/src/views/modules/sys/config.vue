@@ -7,7 +7,7 @@
                @search-change="searchChange"
                @selection-change="selectionChange"
                @on-load="getDataList">
-      <template slot="menuLeft">
+      <!-- <template slot="menuLeft">
         <el-button type="primary"
                    icon="el-icon-plus"
                    size="small"
@@ -17,7 +17,7 @@
                    @click="deleteHandle()"
                    size="small"
                    :disabled="dataListSelections.length <= 0">批量删除</el-button>
-      </template>
+      </template> -->
       <template slot-scope="scope"
                 slot="menu">
         <el-button type="primary"
@@ -25,10 +25,10 @@
                    size="small"
                    @click.stop="addOrUpdateHandle(scope.row.id)">編輯</el-button>
 
-        <el-button type="danger"
+        <!-- <el-button type="danger"
                    icon="el-icon-delete"
                    size="small"
-                   @click.stop="deleteHandle(scope.row.id)">删除</el-button>
+                   @click.stop="deleteHandle(scope.row.id)">删除</el-button> -->
       </template>
     </avue-crud>
     <!-- 弹窗, 新增 / 修改 -->
@@ -101,7 +101,7 @@ export default {
       var ids = id ? [id] : this.dataListSelections.map(item => {
         return item.id
       })
-      this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`, '提示', {
+      this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '刪除' : '批量删除'}]操作?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

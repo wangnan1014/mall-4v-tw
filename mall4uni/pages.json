@@ -4,6 +4,9 @@
 			"path": "pages/accountLogin/accountLogin"
 		},
 		{
+			"path": "pages/accountLogin/pcLogin"
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"backgroundTextStyle": "dark",

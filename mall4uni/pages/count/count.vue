@@ -45,9 +45,11 @@
 			<scroll-view scroll-y="true" >
 				
 			<block v-for="(item, index) in detailList" :key="index">
-				<uni-card style="margin:10upx" :title="'日期：'+formatDate(new Date(item.orderUseDate.replace(/-/g, '/')))" :isFull="true" sub-title="" extra="35 元" >
-					<uni-tag :inverted="true" :text="item.prodName+'   '" type="primary"  ></uni-tag>
+				<uni-card style="margin:10upx" :title="'日期：'+formatDate(new Date(item.orderUseDate.replace(/-/g, '/')))" :isFull="true" sub-title="" :extra="item.total+' 元'" >
+					<uni-tag :inverted="true" :text="item.status==2?'未取餐':'已取餐'+'   '" :type="item.status==2?'error':'primary'"  ></uni-tag>
 					<!-- <uni-tag style="margin-left: 10upx;" :inverted="true" text="已使用" type="primary"  ></uni-tag> -->
+					<uni-tag style='margin-left:5px':inverted="true" :text="item.prodName+'   '" type="primary"  ></uni-tag>
+					
 
 				</uni-card>
 			</block>
@@ -182,11 +184,15 @@ export default {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-	  let isLoad= uni.getStorageSync("categoryLoad",true);
+	  
+	  let isLoad= uni.getStorageSync("countLoad",true);
 	  if(isLoad){
 		  this.defaultMeatSet = uni.getStorageSync("defaultMeatSet")
 		  this.defaultAddr = uni.getStorageSync("defaultAddr")
-		  uni.setStorageSync("categoryLoad",false);
+		  let se = this.getMonthSE();
+		  //获取当月订单数据
+		  this.loadOrderData(se[0],se[1],1);
+		  uni.setStorageSync("countLoad",false);
 	  }
 	  
   },
@@ -257,16 +263,27 @@ export default {
 	        current: current,
 	        size: 31,
 	        startDate: startDate,
-	  	  endDate: endDate,
-	  	  status: 2
+	  	    endDate: endDate,
+	  	    status: 3,
+			addDateInfo: 0,
 	      },
 	      callBack: (res)=> {
 	        // console.log(res);
 		  if(res.records){
+			  let orderUsed  = 0;
+			  let orderNotUsed  = 0;
 			  let dayCount = res.records.length=='0'?'--':res.records.length;
-			  let amoumt  = dayCount=='--'?'--':dayCount*35;
-			  let orderUsed  = '--'
-			  let orderNotUsed  = '--'
+			  // let amoumt  = dayCount=='--'?'--':dayCount*35;
+			  let amoumt = 0;
+			  for(var i=0;i<res.records.length;i++){
+				  var curOrder = res.records[i];
+				  if(curOrder.status===3){ //已使用
+					  orderUsed++;
+				  }else{
+					  orderNotUsed++;
+				  }
+				  amoumt += curOrder.total;
+			  }
 			  this.dayCount = dayCount;
 			  this.amoumt = amoumt;
 			  this.orderUsed = orderUsed;

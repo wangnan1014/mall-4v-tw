@@ -22,7 +22,7 @@
 			// 		path = path.substring(0, path.indexOf('code=') - 1)
 			// 		history.replaceState({}, '', path)
 			// 	}
-				http.getCartCount()
+			//   http.getCartCount()
 			// }
 		},
 		globalData: {

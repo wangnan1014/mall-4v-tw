@@ -1,6 +1,6 @@
 <template>
   <div class="mod-home">
-    <h2>欢迎</h2>
+    <h2></h2>
     <p>&nbsp;</p>
     <p></p>
     <p>&nbsp;</p>

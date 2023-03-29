@@ -24,8 +24,8 @@
 						<uni-tag style="margin-left: 10rpx;" :inverted="true" :text="!defaultMeatSet?'葷食':'素食'" type="primary" @click="setType('attr2')"></uni-tag>
 					 	<uni-tag style="margin-left: 10rpx;" :inverted="true" :text="isAddRice==0?'不加飯':'加飯'" type="primary" @click="setType('addRice')"></uni-tag>
 					 </uni-col>
-					<uni-col :span="4" >
-						<uni-tag  :text="orderMonthStatus==0?'訂餐':'取消'"  :type="orderMonthStatus==0?'primary':'error'" :disabled="1?false:true" @click="orderMonthStatus==0?submitOrder():cancalMonthOrder()"></uni-tag>
+					<uni-col :span="4" v-show="orderMonthStatus!=null">
+						<uni-tag  :text="orderMonthStatus==0?'訂餐':'取消'" :type="orderMonthStatus==0?'primary':'error'" @click="orderMonthStatus==0?submitOrder():cancalMonthOrder()"></uni-tag>
 					</uni-col>
 				</uni-row>
 				</uni-section>
@@ -152,7 +152,9 @@ export default {
 		  this.defaultMeatSet = uni.getStorageSync("defaultMeatSet")
 		  this.defaultAddr = uni.getStorageSync("defaultAddr")
 		  this.isAddRice = uni.getStorageSync("isAddRice")
-		  uni.setStorageSync("categoryLoad",false);		  
+		  this.getOrderStatus();
+		  uni.setStorageSync("categoryLoad",false);
+		  
 	  }
   },
 
@@ -326,6 +328,8 @@ export default {
 					ths.getOrderStatus();
 					uni.hideLoading();
 					uni.setStorageSync("indexLoad",true)
+					uni.setStorageSync("countLoad",true);
+					
 					uni.showToast({
 						title: "取消成功",
 						icon: "none"
@@ -380,6 +384,7 @@ export default {
 				})
 			}
 			uni.setStorageSync("indexLoad",true)
+			uni.setStorageSync("countLoad",true);
 			ths.getOrderStatus();
 			uni.hideLoading();
 		  }

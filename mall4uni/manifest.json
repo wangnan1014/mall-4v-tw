@@ -1,8 +1,8 @@
 {
-    "name" : "訂餐系統",
+    "name" : "全一智慧點餐",
     "appid" : "__UNI__DA90F23",
     "description" : "訂餐系統",
-    "versionName" : "1.0.0",
+    "versionName" : "1.0.3",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -83,8 +83,9 @@
                 "iosStyle" : "common",
                 "useOriginalMsgbox" : true,
                 "android" : {
-                    "hdpi" : "C:/Users/admin/Downloads/团队-11.png",
-                    "xhdpi" : "C:/Users/admin/Pictures/Camera Roll/微信图片_20190601104137.png"
+                    "hdpi" : "C:/Users/admin/Desktop/微信图片_20230323005437.png",
+                    "xhdpi" : "C:/Users/admin/Desktop/微信图片_20230323005437.png",
+                    "xxhdpi" : "C:/Users/admin/Desktop/微信图片_20230323005437.png"
                 }
             }
         }

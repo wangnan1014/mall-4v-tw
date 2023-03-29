@@ -1,3 +1,9 @@
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return year+'-'+month+'-'+day//[year, month, day].map(this.formatNumber).join('-') 
+}
 export const tableOption = {
     border: true,
     selection: false,
@@ -26,7 +32,7 @@ export const tableOption = {
         type:'date',
         format: 'yyyy-MM-dd',                  // 这是组件展示的日期格式
         valueFormat: 'yyyy-MM-dd HH:mm:ss',        // 这是组件value值的格式
-        // searchValue: [this.dateRange[0], this.dateRange[1]],      // 这是我获取的默认的显示日期，我这里是['2020-08-04', '2020-09-22']
+        searchDefault: [formatDate(new Date())+" 00:00:00",formatDate(new Date())+" 00:00:00"],      // 这是我获取的默认的显示日期，我这里是['2020-08-04', '2020-09-22']
         searchSpan:12,
         // searchRange:true,                      
         // searchClearable: false,
@@ -103,8 +109,9 @@ export const tableOption = {
         label: '餐點狀態',
         prop: 'status',
         type: 'select',
+        searchDefault:2,
         dicData: [
-          {  
+            {  
                 value: 2,
                 label: '已訂'
             },
@@ -117,13 +124,14 @@ export const tableOption = {
                 label: '已取消'
             },
         ],
+        value:2,
         search: true
     },
-    {
-        label: '訂餐時間',
-        prop: 'createTime',
-        type:'datetime',
-    },
+    // {
+    //     label: '訂餐時間',
+    //     prop: 'createTime',
+    //     type:'datetime',
+    // },
     {
         label: '取餐時間',
         prop: 'clockedTime',

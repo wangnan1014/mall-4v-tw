@@ -37,7 +37,7 @@
                 slot="menu">
        <el-button type="danger"
                   size="small"   
-                  v-if="isAuth('order:order:update')&&scope.row.status==2"
+                  v-if="isAuth('order:order:update')&&scope.row.status==2&&compareDate(scope.row.orderUseDate)"
                                @click="cancelOrder(scope.row.orderNumber)">取消</el-button>
 
       </template>
@@ -118,8 +118,9 @@ export default {
 
       },
       tableOption: tableOption,
-      dataForm: {},
-      dateRange: [],
+
+      dataForm: {'status':2 },
+      dateRange: [this.formatDate(new Date())+" 00:00:00",this.formatDate(new Date())+" 00:00:00"],
       factoryOptions:[
         {value: '新樂',
         label: '新樂'},
@@ -401,6 +402,27 @@ export default {
       this.dataForm = params
       this.getDataList(this.page, params)
     },
+    //比较时间
+    compareDate(dt){
+      let curDt = new Date();
+      let useDt = new Date(dt);
+      if(this.isToday(useDt)||useDt>=curDt){
+        return true;
+      }else{
+        return false
+      }
+      
+    },
+    isToday(date) {
+      return this.formatDate(new Date()) === this.formatDate(date);
+    },
+    //日期格式化
+		formatDate(date) {
+		  const year = date.getFullYear();
+		  const month = date.getMonth() + 1;
+		  const day = date.getDate();
+		  return year+'-'+month+'-'+day//[year, month, day].map(this.formatNumber).join('-') 
+		},
 
   }
 }

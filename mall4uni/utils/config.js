@@ -19,12 +19,12 @@
 var mpAppId = ''
 
 // wxa临时
-var domain = "http://43.142.163.14:8086"; //统一接口域名，测试环境
-var wsDomain = "ws://43.142.163.14:8086"; //统一接口域名，测试环境
-var picDomain = "http://43.142.163.14:8081/images/"
+// var domain = "http://43.142.163.14:8086"; //统一接口域名，测试环境
+// var wsDomain = "ws://43.142.163.14:8086"; //统一接口域名，测试环境
+// var picDomain = "http://43.142.163.14:8081/images/"
 
-// var domain = "http://127.0.0.1:8086/api";//统一接口域名，测试环境
-// var wsDomain = "http://127.0.0.1:8086/api"; //统一接口域名，测试环境
+// var domain = "http://127.0.0.1:8086";//统一接口域名，测试环境
+// var wsDomain = "http://127.0.0.1:8086"; //统一接口域名，测试环境
 // var picDomain = "http://127.0.0.1:8081/images/"//统一接口域名，测试环境
 
 // var picDomain = "https://img.mall4j.com/"; //图片域名
@@ -32,9 +32,9 @@ var picDomain = "http://43.142.163.14:8081/images/"
 
 
 // 正式环境
-// var domain = "https://hrm.jebsee.com.tw:32681/api"; //统一接口域名，台湾环境
-// var wsDomain = "ws://hrm.jebsee.com.tw:32681/api"; //统一接口域名，台湾环境
-// var picDomain = "https://hrm.jebsee.com.tw:32681/images/"
+var domain = "https://hrm.jebsee.com.tw:32681/api"; //统一接口域名，台湾环境
+var wsDomain = "ws://hrm.jebsee.com.tw:32681/api"; //统一接口域名，台湾环境
+var picDomain = "https://hrm.jebsee.com.tw:32681/images/"
 
 exports.domain = domain;
 exports.picDomain = picDomain;

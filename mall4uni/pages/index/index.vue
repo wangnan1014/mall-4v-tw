@@ -94,6 +94,7 @@ export default {
 			},
 			//订单
 			orders:[],
+			dates:[],
 			//选中日期
 			selectdDay:"",
 			selectdDayStr:"",
@@ -180,10 +181,10 @@ export default {
 			let day = dt.getDay();
 			let month = dt.getMonth();
 			this.selectdDay = dt;
-			let week1 = new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()+1 - day);
-			let week5 = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()+5 - day);
+			let week1 = new Date(dt.getFullYear(),dt.getMonth(),dt.getDate() - day);
+			let week5 = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()+6 - day);
 			this.selectdWeeks=[];
-			for(var i = 1;i<6;i++){
+			for(var i = 0;i<7;i++){
 				let week = new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()+i - day)
 				let monthDefault = week.getMonth();
 				if(month==monthDefault){
@@ -259,10 +260,28 @@ export default {
 		makeDefalutOrder(dt){
 			//比较日期是否是过去，是则不创建
 			let makeDt = new Date(Date.parse(dt));
-			let curTime = new Date(this.formatDate(new Date())+" 09:30:00");
-			if(makeDt<curTime){
-				return;
+			//看是否可訂餐
+			if(this.array_find_new(this.orders,dt)==-1){
+				return 
 			}
+			// let curTime = new Date(this.formatDate(new Date())+" 09:30:00");
+			let curDt = new Date();
+			let curDtStr = this.formatDate(curDt);
+			let curTime = new Date(curDtStr +" 09:00:00");
+			//当天需要判断是否9点半之前（可点餐）
+			if(dt==curDtStr){
+				if(curDt>curTime){
+					return;
+				}
+			}else{
+				if(makeDt<curTime){
+					return;
+				}
+			}			
+			
+			// if(makeDt<curTime){
+			// 	return;
+			// }
 			let defaultAddr = uni.getStorageSync("defaultAddr");
 			let defaultMeatSet = uni.getStorageSync("defaultMeatSet");
 			let isAddRice = uni.getStorageSync("isAddRice");
@@ -274,9 +293,25 @@ export default {
 				return -1;
 			}
 			for(var i = 0;i<arr.length;i++){
-				let orderUseDate = this.formatDate(new Date(arr[i].orderUseDate.replace(/-/g, '/')));
-				if(orderUseDate==dt){
-					return i
+				if(arr[i].orderUseDate!=null&&arr[i].orderUseDate!=""&&arr[i].orderUseDate!=undefined){
+					let orderUseDate = this.formatDate(new Date(arr[i].orderUseDate.replace(/-/g, '/')));
+					if(orderUseDate==dt){
+						return i
+					}
+				}
+			}
+			return -1
+		},
+		array_find_new(arr,dt){
+			if(!arr||arr.length==0){
+				return -1;
+			}
+			for(var i = 0;i<arr.length;i++){
+				if(arr[i].sme01!=null&&arr[i].sme01!=""&&arr[i].sme01!=undefined){
+					let orderUseDate = this.formatDate(new Date(arr[i].sme01.replace(/-/g, '/')));
+					if(orderUseDate==dt&&arr[i].sme02=='Y'){
+						return i
+					}
 				}
 			}
 			return -1
@@ -296,7 +331,7 @@ export default {
 		 * 提交订单
 		 */
 		submitOrder:function(e,index){
-		  var ths = this;
+		    var ths = this;
 			let item = this.detailList[index];
 			uni.showLoading({
 			  mask: true
@@ -324,6 +359,9 @@ export default {
 				this.loadOrderData(this.monthSE[0],this.monthSE[1],1);
 			    
 				uni.hideLoading();
+				uni.setStorageSync("categoryLoad",true);
+				uni.setStorageSync("countLoad",true);
+				
 			  }
 			};
 			http.request(params);
@@ -337,16 +375,18 @@ export default {
 		  uni.showLoading({
 		    mask: true
 		  });
+		
 		  //加载订单列表
 		  var params = {
 		    url: "/p/myOrder/myOrderByDate",
-		    method: "GET",
+		    method: "get",
 		    data: {
 		      current: current,
 		      size: 31,
 		      startDate: startDate,
 			  endDate: endDate,
-			  status: 2
+			  status: 3,
+			  addDateInfo: 1,
 		    },
 		    callBack: (res)=> {
 		      // console.log(res);
@@ -366,19 +406,21 @@ export default {
 				selected: []
 			  }
 			  for (var i = 0; i < list.length; i++) {
-				let makeDt = new Date(list[i].orderUseDate.replace(/-/g, '/'));
-				// let curTime = new Date(this.formatDate(new Date())+" 09:30:00");
-				 
-			  	this.info.selected.push({
-					date: this.formatDate(makeDt),
-					info: '已訂'
-			  	}) 
+				if(list[i].orderUseDate!=null&&list[i].orderUseDate!=""&&list[i].orderUseDate!=undefined){
+					let makeDt = new Date(list[i].orderUseDate.replace(/-/g, '/'));
+					this.info.selected.push({
+						date: this.formatDate(makeDt),
+						info: '已訂'
+					}) 
+				}
 			  }
 
 			  this.pages = res.pages;
 			  this.current = res.current;
 			  this.detail();
 		      uni.hideLoading();
+			  uni.setStorageSync("categoryLoad",true);
+			  uni.setStorageSync("countLoad",true);
 		    }
 		  };
 		  http.request(params);
@@ -387,6 +429,7 @@ export default {
 		 * 取消订单
 		 */
 		cancelOrder: function (e) {
+		  
 		  var ordernum = e.orderNumber;
 		  var ths = this;
 		  uni.showModal({
@@ -410,6 +453,8 @@ export default {
 		            // console.log(res);
 				    ths.loadOrderData(ths.monthSE[0],ths.monthSE[1],1);
 		            uni.hideLoading();
+					uni.setStorageSync("categoryLoad",true);
+					uni.setStorageSync("countLoad",true);
 		          }
 		        };
 		        http.request(params);

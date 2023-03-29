@@ -6,11 +6,13 @@ page{
   margin-top: 60px;
 }
 /* image {
-  display: block;
-  width: 250rpx;
-  height: 240rpx;
-  margin: auto;
-  border-radius: 30%;
+  width: 100%;
+  height: 100%;
+  top :0;
+  left:0;
+ margin: auto;
+  z-index: -100;
+ border-radius: 30%;
   margin-bottom: 8%;
 } */
 
@@ -20,16 +22,16 @@ page{
   margin-bottom: 20%;
 }
 .authorized-btn {
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   text-align: center;
-  background-color: #489ee2;
-  border: 1rpx solid #489ee2;
+  background-color: #00dbbd;
+  border: 1rpx solid #00dbbd;
   color: #fff;
   border-radius: 6rpx;
   font-size: 26rpx;
   padding: 8rpx;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
 }
 .to-idx-btn{
 	width: 90%;
@@ -39,7 +41,7 @@ page{
 	color: #333;
 	border-radius: 6rpx;
 	font-size: 26rpx;
-	padding: 8rpx;
+	padding: 15rpx;
 	margin-top: 30rpx;
 }
 .form-title {

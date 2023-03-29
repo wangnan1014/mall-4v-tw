@@ -32,10 +32,10 @@
                    v-if="isAuth('admin:user:update')"
                    @click.stop="addOrUpdateHandle(scope.row.userId)">編輯</el-button>
       <el-button type="danger"
-                  icon="el-icon-delete"
+                  icon="el-icon-refresh-left"
                   size="small"
                    v-if="isAuth('admin:user:delete')"
-                   @click.stop="deleteHandle(scope.row.userId)">重置密碼</el-button>
+                   @click.stop="resetPassWord(scope.row.userId,scope.row.nickName)">重置密碼</el-button>
        <el-button type="danger"
                   icon="el-icon-delete"
                   size="small"
@@ -100,6 +100,35 @@ export default {
       this.$nextTick(() => {
         this.$refs.addOrUpdate.init(id)
       })
+    },
+    resetPassWord(id,nk){
+      var ids = id ? id : item.userId;
+      var user_nick_name = nk ? nk:item.nickName;
+      this.$confirm(`确定进行[重置密码]操作?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(()=>{
+        this.$http({
+            url: this.$http.adornUrl('/admin/user'),
+            method: 'put',
+            data: this.$http.adornData({
+              userId: ids,
+              loginPassword:"{bcrypt}$2a$10$DRzI9uLWqjHy7Dr0qmrjlOB69uS4P17VWfnM.mWzKcnTBUMYoObTe",
+              nickName:user_nick_name,
+          })
+          }).then(({ data }) => {
+            this.$message({
+              message: '重置成功，密码为：12345678',
+              type: 'success',
+              duration: 2500,
+              onClose: () => {
+                this.getDataList(this.page)
+              }
+            })
+          })
+      })
+      .catch(() => {})
     },
     // 删除
     deleteHandle (id) {

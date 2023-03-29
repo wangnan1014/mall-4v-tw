@@ -1,13 +1,13 @@
 export const tableOption = {
   border: true,
-  selection: true,
+  // selection: true,
   index: false,
-  indexLabel: '序号',
-  stripe: true,
+  indexLabel: '序號',
+  // stripe: true,
   menuAlign: 'center',
   menuWidth: 350,
   align: 'center',
-  refreshBtn: true,
+  // refreshBtn: true,
   searchSize: 'mini',
   addBtn: false,
   editBtn: false,
@@ -18,11 +18,11 @@ export const tableOption = {
     value: 'value'
   },
   column: [{
-    label: '参数名',
+    label: '參數名',
     prop: 'paramKey',
     search: true
   }, {
-    label: '参数值',
+    label: '參數值',
     prop: 'paramValue'
   }, {
     label: '備注',
